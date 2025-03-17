@@ -45,8 +45,8 @@ export class AuthController {
     async refresh(req: Request, res: Response) {
         const { refresh_token } = req.cookies;
         
-        const payload = JWT.verify({ token: refresh_token, refresh: true }) as { id: string };
-        const user = await this.getUserById.execute(payload.id);
+        const payload = JWT.verify({ token: refresh_token, refresh: true }) as { uuid: string };
+        const user = await this.getUserById.execute(payload.uuid);
 
         if (!user) {
             return res
