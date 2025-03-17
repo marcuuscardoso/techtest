@@ -53,7 +53,6 @@ export class BrasilApiService {
         `/cnpj/v1/${cleanCNPJ}`
       );
       
-      // Map the Portuguese field names to English
       const mappedResponse: CNPJResponse = {
         cnpj: response.data.cnpj,
         legalName: response.data.razao_social,

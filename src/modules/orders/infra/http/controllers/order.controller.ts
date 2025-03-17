@@ -37,7 +37,6 @@ export class OrderController {
       createdAt: order.createdAt
     };
 
-    // Adicionar o ID do pedido externo se disponível
     if (order.externalOrderId) {
       Object.assign(response, { externalOrderId: order.externalOrderId });
     }
@@ -60,7 +59,6 @@ export class OrderController {
       updatedAt: order.updatedAt
     };
 
-    // Adicionar o ID do pedido externo se disponível
     if (order.externalOrderId) {
       Object.assign(response, { externalOrderId: order.externalOrderId });
     }

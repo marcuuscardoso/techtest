@@ -44,7 +44,6 @@ export class ExternalOrderApiService {
     
     this.orderRepository = new OrderRepository();
 
-    // Iniciar o processo de retry para pedidos pendentes
     this.startRetryProcess();
   }
 
