@@ -21,8 +21,8 @@ export default defineRouter([
   {
     method: ERouterMethod.POST,
     url: "/",
-    authMethod: EAuthMethod.PUBLIC,
-    // roles: [EUserRole.ADMIN],
+    authMethod: EAuthMethod.PRIVATE,
+    roles: [EUserRole.ADMIN],
     handler: errorMiddleware((req, res) => userController.createUser(req, res))
   },
   {
