@@ -9,7 +9,7 @@ module.exports = {
         name: "John Doe",
         email: "johndoe@example.com",
         phone: "11987654321",
-        cnpj: "12345678000190",
+        cnpj: "48261039000199",
         legalName: "Doe Legal",
         brandName: "Doe Brand",
         state: "SP",

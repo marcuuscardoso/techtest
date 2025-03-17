@@ -3,12 +3,15 @@ import User, { EUserRole, IUser } from "@/shared/infra/sequelize/models/user.mod
 import { ConflictError } from "@/shared/errors/conflict.error";
 import { ValidationError } from "@/shared/errors/validation.error";
 import { PasswordUtil } from "@/shared/utils/password.util";
+import { BrasilApiService } from "@/shared/services/brasilApi.service";
 
 export class CreateUserService {
   private userRepository: UserRepository;
+  private brasilApiService: BrasilApiService;
 
   constructor() {
     this.userRepository = new UserRepository();
+    this.brasilApiService = BrasilApiService.getInstance();
   }
 
   async execute(userData: Omit<IUser, 'legalName' | 'brandName' | 'role'>): Promise<User> {
@@ -24,11 +27,13 @@ export class CreateUserService {
 
     const hashedPassword = await PasswordUtil.hash(userData.password);
 
+    const cnpjData = await this.brasilApiService.getCNPJ(userData.cnpj);
+
     const userDataWithDefaults: IUser = {
       ...userData,
       password: hashedPassword,
-      legalName: "teste",
-      brandName: "teste",
+      legalName: cnpjData.razao_social,
+      brandName: cnpjData.nome_fantasia,
       role: EUserRole.USER
     };
 
