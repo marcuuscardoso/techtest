@@ -25,6 +25,17 @@ export class UserRepository {
     });
   }
 
+  async findByCnpj(cnpj: string): Promise<User | null> {
+    return User.findOne({
+      where: { cnpj },
+      include: [
+        { model: Address },
+        { model: Phone },
+        { model: UserName }
+      ]
+    });
+  }
+
   async findByEmail(email: string): Promise<User | null> {
     return User.findOne({
       where: { email },
