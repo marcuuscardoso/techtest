@@ -1,0 +1,8 @@
+const path = process.env.NODE_ENV === 'production' ? './dist' : './src';
+
+module.exports = {
+  "config": `${path}/config/sequelize.config.js`,
+  "models-path": `${path}/shared/infra/sequelize/models`,
+  "migrations-path": `${path}/shared/infra/sequelize/migrations`,
+  "seeders-path": `${path}/shared/infra/sequelize/seeders`
+};

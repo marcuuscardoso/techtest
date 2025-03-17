@@ -1,10 +1,16 @@
 import { AuthController } from "../controllers/auth.controller";
-import { errorMiddleware } from "@shared/errors/error.handler";
+import { errorMiddleware } from "@/shared/errors/error.handler";
 import { defineRouter, EAuthMethod, ERouterMethod } from "@/shared/infra/http/api/defineRouter";
 
 const authController = new AuthController();
 
 export default defineRouter([
+    {
+        method: ERouterMethod.POST,
+        url: "/login",
+        authMethod: EAuthMethod.PUBLIC,
+        handler: errorMiddleware((req, res) => authController.login(req, res))
+    },
     {
         method: ERouterMethod.GET,
         url: "/session",

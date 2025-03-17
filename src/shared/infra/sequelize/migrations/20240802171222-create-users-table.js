@@ -33,10 +33,6 @@ module.exports = {
         type: Sequelize.STRING(256),
         allowNull: false,
       },
-      companyName: {
-        type: Sequelize.STRING(256),
-        allowNull: false,
-      },
       legalName: {
         type: Sequelize.STRING(256),
         allowNull: false,
@@ -67,6 +63,10 @@ module.exports = {
       },
       role: {
         type: Sequelize.ENUM("ADMIN", "USER"),
+        allowNull: false,
+      },
+      password: {
+        type: Sequelize.STRING(256),
         allowNull: false,
       },
       createdAt: {

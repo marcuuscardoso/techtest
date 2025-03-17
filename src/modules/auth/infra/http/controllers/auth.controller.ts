@@ -1,13 +1,45 @@
-import { GetOrCreateUserService } from "@/modules/users/services/getOrCreate.service";
-import { GetUserByIdService } from "@/modules/users/services/getUserById.service";
+import { GetUserByIdService } from "../../../../../modules/users/services/getUserById.service";
 import { JWT } from "@/shared/utils/jwt.util";
 import { Request, Response } from "express";
+import { LoginService } from "@/modules/auth/services/login.service";
+import { z } from "zod";
   
 export class AuthController {
     private readonly getUserById: GetUserByIdService;
+    private readonly loginService: LoginService;
 
     constructor() {
         this.getUserById = new GetUserByIdService();
+        this.loginService = new LoginService();
+    }
+
+    async login(req: Request, res: Response) {
+        const bodySchema = z.object({
+            email: z.string().email(),
+            password: z.string().min(1)
+        }).strict();
+
+        const { email, password } = bodySchema.parse(req.body);
+
+        const { user, accessToken, refreshToken } = await this.loginService.execute({ email, password });
+
+        return res
+            .status(200)
+            .cookie("access_token", accessToken, 
+                {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                    sameSite: "strict"
+                }
+            )
+            .cookie("refresh_token", refreshToken, 
+                {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                    sameSite: "strict"
+                }
+            )
+            .json({ user });
     }
 
     async refresh(req: Request, res: Response) {
@@ -24,7 +56,7 @@ export class AuthController {
                 .send({ message: "Sessão inválida. Por favor, tente reautenticar-se." });
         }
 
-        const { accessToken, refreshToken } = JWT.generateTokens(user.id);
+        const { accessToken, refreshToken } = JWT.generateTokens(user.uuid);
 
         return res
             .status(200)

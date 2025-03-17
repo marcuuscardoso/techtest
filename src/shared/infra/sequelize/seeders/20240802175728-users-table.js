@@ -10,7 +10,6 @@ module.exports = {
         email: "johndoe@example.com",
         phone: "11987654321",
         cnpj: "12345678000190",
-        companyName: "Doe Industries",
         legalName: "Doe Legal",
         brandName: "Doe Brand",
         state: "SP",
@@ -19,6 +18,7 @@ module.exports = {
         street: "Rua Exemplo",
         number: 123,
         role: "ADMIN",
+        password: "$2b$10$D39YHf0FdvoHi6WYGLfWju7w9WqvJkJQkhKAGOqkWPQjet7lSeYHa",
         createdAt: new Date(),
         updatedAt: new Date()
       }

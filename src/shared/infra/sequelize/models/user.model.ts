@@ -12,7 +12,6 @@ export interface IUser {
     email: string;
     phone: string;
     cnpj: string;
-    companyName: string;
     legalName: string;
     brandName: string;
     state: string;
@@ -21,6 +20,7 @@ export interface IUser {
     street: string;
     number: string;
     role: EUserRole;
+    password: string;
 }
 
 @Table({
@@ -53,10 +53,6 @@ export default class User extends Model<IUser> {
     @AllowNull(false)
     @Column(DataType.STRING(256))
     declare public cnpj: string;
-
-    @AllowNull(false)
-    @Column(DataType.STRING(256))
-    declare public companyName: string;
     
     @AllowNull(false)
     @Column(DataType.STRING(256))
@@ -89,4 +85,8 @@ export default class User extends Model<IUser> {
     @AllowNull(false)
     @Column(DataType.STRING(256))
     declare public role: EUserRole;
+
+    @AllowNull(false)
+    @Column(DataType.STRING(256))
+    declare public password: string;
 }
