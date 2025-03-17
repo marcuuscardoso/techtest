@@ -50,11 +50,7 @@ export class CreateUserService {
 
   private validateUserData(userData: CreateUserRequest): void {
     const validations = [
-      { condition: !userData.email, message: "Email é obrigatório" },
       { condition: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.email), message: "Formato de email inválido" },
-      { condition: !userData.password || userData.password.length < 6, message: "Senha deve ter pelo menos 6 caracteres" },
-      { condition: !userData.names || userData.names.length === 0, message: "Pelo menos um nome é obrigatório" },
-      { condition: !userData.addresses || userData.addresses.length === 0, message: "Pelo menos um endereço é obrigatório" }
     ];
 
     const failedValidation = validations.find(v => v.condition);
@@ -65,7 +61,7 @@ export class CreateUserService {
     if (userData.phones?.length) {
       userData.phones.forEach(phone => {
         const cleanPhone = phone.replace(/\D/g, '');
-        if (cleanPhone.length < 10 || cleanPhone.length > 11) {
+        if (cleanPhone.length < 9 || cleanPhone.length > 11) {
           throw new ValidationError(`Número de telefone inválido: ${phone}`);
         }
       });
