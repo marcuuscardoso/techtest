@@ -1,0 +1,53 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "jsx": "react",
+      "sourceMap": true,
+      "pretty": true,
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "lib": ["ES2020", "dom"],
+      
+      "allowJs": true,
+      
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+  
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+  
+      "strict": true,
+      "strictNullChecks": true,
+      "skipLibCheck": true,
+  
+      "typeRoots": [
+        "./src/types",
+        "./node_modules/@types"
+      ],
+      "types": [
+        "node",
+      ],
+  
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["./src/*"],
+        "@modules/*": ["./src/modules/*"],
+        "@config/*": ["./src/config/*"],
+        "@shared/*": ["./src/shared/*"],
+      }
+    },
+    "include": [
+      "src/**/*.d.ts",
+      "src/**/*.ts",
+      "src/*.ts",
+      "src/config/sequelize.config.js",
+      "src/shared/infra/sequelize/migrations/*.js"
+    ],
+    "exclude": [
+      "node_modules",
+      "dist"
+    ]
+  }
+  

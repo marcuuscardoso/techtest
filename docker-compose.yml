@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  mysql:
+    container_name: tech-test-mysql
+    image: mysql:8.2.0
+    env_file: .env
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    networks:
+      - tech-test
+    logging:
+      driver: none
+
+volumes:
+  dbdata:
+    driver: local
+  cache:
+    driver: local
+
+networks:
+  tech-test:
+    driver: bridge
