@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "0a0b989d-7eb5-49fe-b7ce-7df2e1b120d1",
+		"name": "Tech Test API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31044203",
+		"_collection_link": "https://www.postman.com/winter-zodiac-779832/workspace/tech-test/collection/31044203-0a0b989d-7eb5-49fe-b7ce-7df2e1b120d1?action=share&source=collection_link&creator=31044203"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"customer@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/auth/login",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Session",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/auth/session",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"auth",
+								"session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/auth/logout",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/auth/refresh",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resellers",
+			"item": [
+				{
+					"name": "Get All Resellers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/resellers",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"resellers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reseller By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/resellers/:id",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"resellers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Reseller",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"reseller@example.com\",\n    \"password\": \"password123\",\n    \"cnpj\": \"48261039000199\",\n    \"names\": [\n        {\n            \"name\": \"Reseller Company Name\",\n            \"isPrimary\": true\n        }\n    ],\n    \"phones\": [\"11999999999\"],\n    \"addresses\": [\n        {\n            \"state\": \"SP\",\n            \"city\": \"São Paulo\",\n            \"neighborhood\": \"Centro\",\n            \"street\": \"Avenida Paulista\",\n            \"number\": \"1000\",\n            \"complement\": \"Sala 123\",\n            \"zipCode\": \"01310-100\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/resellers",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"resellers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"customer@example.com\",\n    \"password\": \"password123\",\n    \"cnpj\": \"60316817000103\",\n    \"names\": [\n        {\n            \"name\": \"Customer Company Name\",\n            \"isPrimary\": true\n        }\n    ],\n    \"phones\": [\"11999999999\"],\n    \"addresses\": [\n        {\n            \"state\": \"SP\",\n            \"city\": \"São Paulo\",\n            \"neighborhood\": \"Centro\",\n            \"street\": \"Avenida Paulista\",\n            \"number\": \"1000\",\n            \"complement\": \"Sala 123\",\n            \"zipCode\": \"01310-100\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/resellers/create-customer",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"resellers",
+								"create-customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Reseller",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"updated@example.com\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/resellers/:id",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"resellers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Reseller",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/resellers/:id",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"resellers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get Order By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/orders/:id",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order (Below 1000 units)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cnpj\": \"48261039000199\",\n    \"items\": [\n        {\n            \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"productName\": \"Product Name\",\n            \"quantity\": 10\n        }\n    ],\n    \"observations\": \"This order has less than 1000 units, so it won't be sent to the external API\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/orders",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order (1000+ units)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cnpj\": \"48261039000199\",\n    \"items\": [\n        {\n            \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"productName\": \"Product A\",\n            \"quantity\": 500\n        },\n        {\n            \"productId\": \"223e4567-e89b-12d3-a456-426614174001\",\n            \"productName\": \"Product B\",\n            \"quantity\": 500\n        }\n    ],\n    \"observations\": \"This order has 1000 units, so it will be sent to the external API\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/orders",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order (Multiple Products)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cnpj\": \"48261039000199\",\n    \"items\": [\n        {\n            \"productId\": \"123e4567-e89b-12d3-a456-426614174000\",\n            \"productName\": \"Product A\",\n            \"quantity\": 300\n        },\n        {\n            \"productId\": \"223e4567-e89b-12d3-a456-426614174001\",\n            \"productName\": \"Product B\",\n            \"quantity\": 300\n        },\n        {\n            \"productId\": \"323e4567-e89b-12d3-a456-426614174002\",\n            \"productName\": \"Product C\",\n            \"quantity\": 300\n        },\n        {\n            \"productId\": \"423e4567-e89b-12d3-a456-426614174003\",\n            \"productName\": \"Product D\",\n            \"quantity\": 300\n        }\n    ],\n    \"observations\": \"This order has 1200 units across multiple products, so it will be sent to the external API\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/api/orders",
+							"host": [
+								"http://127.0.0.1:3001"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "http://localhost:3000"
+		}
+	]
+}

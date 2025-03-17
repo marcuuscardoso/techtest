@@ -29,13 +29,20 @@ export class OrderController {
 
     const order = await this.createOrderService.execute(validatedData);
 
-    return res.status(201).json({
-        orderId: order.uuid,
-        items: order.items,
-        status: order.status,
-        observations: order.observations,
-        createdAt: order.createdAt
-    });
+    const response = {
+      orderId: order.uuid,
+      items: order.items,
+      status: order.status,
+      observations: order.observations,
+      createdAt: order.createdAt
+    };
+
+    // Adicionar o ID do pedido externo se disponível
+    if (order.externalOrderId) {
+      Object.assign(response, { externalOrderId: order.externalOrderId });
+    }
+
+    return res.status(201).json(response);
   }
 
   async getOrderById(req: Request, res: Response): Promise<Response> {
@@ -43,14 +50,21 @@ export class OrderController {
 
     const order = await this.getOrderByIdService.execute(id);
 
-    return res.status(200).json({
-        orderId: order.uuid,
-        resellerId: order.resellerId,
-        items: order.items,
-        status: order.status,
-        observations: order.observations,
-        createdAt: order.createdAt,
-        updatedAt: order.updatedAt
-    });
+    const response = {
+      orderId: order.uuid,
+      resellerId: order.resellerId,
+      items: order.items,
+      status: order.status,
+      observations: order.observations,
+      createdAt: order.createdAt,
+      updatedAt: order.updatedAt
+    };
+
+    // Adicionar o ID do pedido externo se disponível
+    if (order.externalOrderId) {
+      Object.assign(response, { externalOrderId: order.externalOrderId });
+    }
+
+    return res.status(200).json(response);
   }
 } 

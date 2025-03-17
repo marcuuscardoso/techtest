@@ -21,9 +21,13 @@ module.exports = {
         onDelete: 'RESTRICT'
       },
       status: {
-        type: Sequelize.ENUM('Pending', 'Processed', 'Shipped', 'Delivered'),
+        type: Sequelize.ENUM('Pending', 'Processing', 'Processed', 'Shipped', 'Delivered'),
         allowNull: false,
         defaultValue: 'Pending'
+      },
+      externalOrderId: {
+        type: Sequelize.STRING(255),
+        allowNull: true
       },
       observations: {
         type: Sequelize.TEXT,

@@ -31,7 +31,7 @@ export const createNamedLogger = (name: string, options: winston.LoggerOptions &
 
     const transports: winston.transport[] = (options.transports ? options.transports as any : []).concat([
         new winston.transports.Console({ 
-            level: "info",
+            level: "debug",
             format: options.format || generateLoggerFormat(name, defaultPrintfFormat)
         })
     ]);

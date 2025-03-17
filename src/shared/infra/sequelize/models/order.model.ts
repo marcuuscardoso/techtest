@@ -5,6 +5,7 @@ import OrderItem from "./orderItem.model";
 
 export enum OrderStatus {
     PENDING = "Pending",
+    PROCESSING = "Processing",
     PROCESSED = "Processed",
     SHIPPED = "Shipped",
     DELIVERED = "Delivered"
@@ -13,6 +14,7 @@ export enum OrderStatus {
 export interface IOrder {
     uuid?: string;
     resellerId: string;
+    externalOrderId?: string;
     status: OrderStatus;
     observations?: string;
     createdAt?: Date;
@@ -41,6 +43,10 @@ export default class Order extends Model<IOrder> {
 
     @BelongsTo(() => User)
     declare public user: User;
+
+    @AllowNull(true)
+    @Column(DataType.STRING(255))
+    declare public externalOrderId: string;
 
     @AllowNull(false)
     @Column(DataType.ENUM(...Object.values(OrderStatus)))

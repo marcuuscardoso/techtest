@@ -3,6 +3,7 @@ import { Dialect } from "sequelize";
 import { SequelizeOptions } from "sequelize-typescript";
 import { join } from "path";
 import { isDevelopment } from "@/shared/utils/constants.util";
+import { TechTest } from "@/shared/infra/http/app";
 
 export const dbConfig: SequelizeOptions = {
     dialect: "mysql" as Dialect,
@@ -18,7 +19,7 @@ export const dbConfig: SequelizeOptions = {
         idle: 10000
     },
     ssl: !isDevelopment,
-    logging: process.env.DEBUG ? console.log : false,
+    logging: process.env.DEBUG ? (msg: string) => TechTest.instance.logger.debug(msg) : false,
     models: [join(__dirname, "../shared/infra/sequelize/models/*") + (process.env.NODE_ENV === "production" ? ".js" : ".ts")],
     retry: {
         max: 10,

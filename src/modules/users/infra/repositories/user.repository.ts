@@ -1,4 +1,4 @@
-import User, { IUser } from "@/shared/infra/sequelize/models/user.model";
+import User, { EUserRole, IUser } from "@/shared/infra/sequelize/models/user.model";
 import Address from "@/shared/infra/sequelize/models/address.model";
 import Phone from "@/shared/infra/sequelize/models/phone.model";
 import UserName from "@/shared/infra/sequelize/models/userName.model";
@@ -39,6 +39,17 @@ export class UserRepository {
   async findByEmail(email: string): Promise<User | null> {
     return User.findOne({
       where: { email },
+      include: [
+        { model: Address },
+        { model: Phone },
+        { model: UserName }
+      ]
+    });
+  }
+
+  async findByRole(role: EUserRole): Promise<User[]> {
+    return User.findAll({
+      where: { role },
       include: [
         { model: Address },
         { model: Phone },
