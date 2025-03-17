@@ -26,6 +26,13 @@ export default defineRouter([
     handler: errorMiddleware((req, res) => userController.createUser(req, res))
   },
   {
+    method: ERouterMethod.POST,
+    url: "/create-customer",
+    authMethod: EAuthMethod.PRIVATE,
+    roles: [EUserRole.RESELLER],
+    handler: errorMiddleware((req, res) => userController.createCustomer(req, res))
+  },
+  {
     method: ERouterMethod.PATCH,
     url: "/:id",
     authMethod: EAuthMethod.PRIVATE,

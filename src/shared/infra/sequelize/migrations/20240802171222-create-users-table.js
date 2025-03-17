@@ -62,7 +62,7 @@ module.exports = {
         allowNull: false,
       },
       role: {
-        type: Sequelize.ENUM("ADMIN", "RESELLER"),
+        type: Sequelize.ENUM("ADMIN", "RESELLER", "CUSTOMER"),
         allowNull: false,
       },
       password: {

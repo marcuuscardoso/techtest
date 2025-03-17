@@ -169,6 +169,34 @@
           "response": []
         },
         {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"customer@example.com\",\n    \"password\": \"password123\",\n    \"cnpj\": \"48261039000199\",\n    \"names\": [\n        {\n            \"name\": \"Customer Company Name\",\n            \"isPrimary\": true\n        }\n    ],\n    \"phones\": [\"11999999999\"],\n    \"addresses\": [\n        {\n            \"state\": \"SP\",\n            \"city\": \"São Paulo\",\n            \"neighborhood\": \"Centro\",\n            \"street\": \"Avenida Paulista\",\n            \"number\": \"1000\",\n            \"complement\": \"Sala 123\",\n            \"zipCode\": \"01310-100\"\n        }\n    ]\n}"
+            },
+            "url": {
+              "raw": "{{baseurl}}/api/resellers/create-customer",
+              "host": [
+                "{{baseurl}}"
+              ],
+              "path": [
+                "api",
+                "resellers",
+                "create-customer"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "Update Reseller",
           "request": {
             "method": "PATCH",

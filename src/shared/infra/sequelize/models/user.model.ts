@@ -6,7 +6,8 @@ import UserName from "./userName.model";
 
 export enum EUserRole {
     ADMIN = "ADMIN",
-    RESELLER = "RESELLER"
+    RESELLER = "RESELLER",
+    CUSTOMER = "CUSTOMER"
 }
 
 export interface IUser {
