@@ -21,7 +21,7 @@ export class AuthController {
 
         const { email, password } = bodySchema.parse(req.body);
 
-        const { user, accessToken, refreshToken } = await this.loginService.execute({ email, password });
+        const { reseller, accessToken, refreshToken } = await this.loginService.execute({ email, password });
 
         return res
             .status(200)
@@ -39,7 +39,7 @@ export class AuthController {
                     sameSite: "strict"
                 }
             )
-            .json({ user });
+            .json({ reseller });
     }
 
     async refresh(req: Request, res: Response) {
@@ -53,7 +53,7 @@ export class AuthController {
                 .status(401)
                 .clearCookie("access_token")
                 .clearCookie("refresh_token")
-                .send({ message: "Sessão inválida. Por favor, tente reautenticar-se." });
+                .send({ message: "Invalid session. Please try to authenticate again." });
         }
 
         const { accessToken, refreshToken } = JWT.generateTokens(user.uuid);
@@ -74,7 +74,7 @@ export class AuthController {
                     sameSite: "strict"
                 }
             )
-            .send({ message: "Tokens renovados com sucesso" });
+            .send({ message: "Tokens renewed successfully" });
     }
     
     async signOut(req: Request, res: Response) {
@@ -91,7 +91,7 @@ export class AuthController {
         return res
             .status(200)
             .send({
-                user: {
+                reseller: {
                     id,
                     name,
                     email,

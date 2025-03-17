@@ -18,7 +18,7 @@ export default class UserName extends Model<IUserName> {
   @AllowNull(false)
   @Unique({
     name: "unique_user_name_uuid",
-    msg: "Colisão no UUID do nome de usuário."
+    msg: "Collision in user name UUID."
   })
   @Default(UUIDV4)
   @Column(DataType.UUID)

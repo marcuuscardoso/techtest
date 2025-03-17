@@ -23,7 +23,7 @@ export default class Address extends Model<IAddress> {
   @AllowNull(false)
   @Unique({
     name: "unique_address_uuid",
-    msg: "Colisão no UUID do endereço."
+    msg: "Collision in address UUID."
   })
   @Default(UUIDV4)
   @Column(DataType.UUID)

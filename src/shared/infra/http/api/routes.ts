@@ -5,7 +5,7 @@ import orderRoutes from "@/modules/orders/infra/http/routes/order.routes";
 
 const router = Router();
 
-router.use("/users", userRouter);
+router.use("/resellers", userRouter);
 router.use("/auth", authRouter);
 router.use("/orders", orderRoutes);
 

@@ -50,7 +50,7 @@ export class CreateUserService {
 
   private validateUserData(userData: CreateUserRequest): void {
     const validations = [
-      { condition: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.email), message: "Formato de email inválido" },
+      { condition: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.email), message: "Invalid email format" },
     ];
 
     const failedValidation = validations.find(v => v.condition);
@@ -62,7 +62,7 @@ export class CreateUserService {
       userData.phones.forEach(phone => {
         const cleanPhone = phone.replace(/\D/g, '');
         if (cleanPhone.length < 9 || cleanPhone.length > 11) {
-          throw new ValidationError(`Número de telefone inválido: ${phone}`);
+          throw new ValidationError(`Invalid phone number: ${phone}`);
         }
       });
     }
@@ -88,9 +88,9 @@ export class CreateUserService {
       email: processedData.email,
       password: await PasswordUtil.hash(processedData.password),
       cnpj: processedData.cnpj,
-      legalName: cnpjData?.razao_social,
-      brandName: cnpjData?.nome_fantasia,
-      role: EUserRole.USER
+      legalName: cnpjData?.legalName,
+      brandName: cnpjData?.tradingName,
+      role: EUserRole.RESELLER
     };
 
     const user = await this.userRepository.create(userDataToCreate);

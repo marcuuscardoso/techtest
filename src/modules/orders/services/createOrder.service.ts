@@ -31,27 +31,27 @@ export class CreateOrderService {
 
   async execute(orderData: CreateOrderRequest): Promise<Order> {
     if (!orderData.cnpj) {
-      throw new ValidationError("CNPJ da revenda é obrigatório");
+      throw new ValidationError("Reseller CNPJ is required");
     }
 
     const reseller = await this.userRepository.findByCnpj(orderData.cnpj);
     if (!reseller) {
-      throw new NotFoundError("Revenda não encontrada");
+      throw new NotFoundError("Reseller not found");
     }
 
     if (!orderData.items || orderData.items.length === 0) {
-      throw new ValidationError("Pelo menos um item é obrigatório no pedido");
+      throw new ValidationError("At least one item is required in the order");
     }
 
     for (const item of orderData.items) {
       if (!item.productId) {
-        throw new ValidationError("ID do produto é obrigatório");
+        throw new ValidationError("Product ID is required");
       }
       if (!item.productName) {
-        throw new ValidationError("Nome do produto é obrigatório");
+        throw new ValidationError("Product name is required");
       }
       if (!item.quantity || item.quantity <= 0) {
-        throw new ValidationError("Quantidade deve ser maior que zero");
+        throw new ValidationError("Quantity must be greater than zero");
       }
     }
 

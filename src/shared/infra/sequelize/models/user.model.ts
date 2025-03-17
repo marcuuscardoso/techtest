@@ -6,7 +6,7 @@ import UserName from "./userName.model";
 
 export enum EUserRole {
     ADMIN = "ADMIN",
-    USER = "USER"
+    RESELLER = "RESELLER"
 }
 
 export interface IUser {
@@ -28,7 +28,7 @@ export default class User extends Model<IUser> {
     @AllowNull(false)
     @Unique({
         name: "unique_user_uuid",
-        msg: "Colisão no UUID do usuário."
+        msg: "Collision in user UUID."
     })
     @Default(UUIDV4)
     @Column(DataType.UUID)
@@ -37,7 +37,7 @@ export default class User extends Model<IUser> {
     @AllowNull(false)
     @Unique({
         name: "unique_user_email",
-        msg: "Este email já está em uso."
+        msg: "This email is already in use."
     })
     @Column(DataType.STRING(100))
     declare public email: string;

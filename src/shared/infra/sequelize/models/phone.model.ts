@@ -17,7 +17,7 @@ export default class Phone extends Model<IPhone> {
   @AllowNull(false)
   @Unique({
     name: "unique_phone_uuid",
-    msg: "Colisão no UUID do telefone."
+    msg: "Collision in phone UUID."
   })
   @Default(UUIDV4)
   @Column(DataType.UUID)

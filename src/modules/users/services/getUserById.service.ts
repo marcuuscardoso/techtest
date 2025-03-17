@@ -13,7 +13,7 @@ export class GetUserByIdService {
     const user = await this.userRepository.findById(uuid);
 
     if (!user) {
-      throw new NotFoundError("User not found");
+      throw new NotFoundError("Reseller not found");
     }
 
     return user;

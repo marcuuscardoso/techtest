@@ -9,11 +9,11 @@ export const authenticationMiddleware = async (req: Request, res: Response, next
     const { access_token } = req.cookies;
 
     const payload = JWT.verify({ token: access_token, refresh: false }) as { uuid: string };
-    const user = await getUserById.execute(payload.uuid);
+    const reseller = await getUserById.execute(payload.uuid);
 
-    if (!user) throw new ValidationError("Sessão inválida. Por favor, tente reautenticar-se.", 401);
+    if (!reseller) throw new ValidationError("Invalid session. Please try to authenticate again.", 401);
 
-    req.user = user;
+    req.user = reseller;
 
     return next();
 };

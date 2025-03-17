@@ -28,7 +28,7 @@ export default class Order extends Model<IOrder> {
     @AllowNull(false)
     @Unique({
         name: "unique_order_uuid",
-        msg: "Colisão no UUID do pedido."
+        msg: "Collision in order UUID."
     })
     @Default(UUIDV4)
     @Column(DataType.UUID)

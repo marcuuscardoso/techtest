@@ -16,7 +16,7 @@ export class UpdateUserService {
     const existingUser = await this.userRepository.findById(uuid);
 
     if (!existingUser) {
-      throw new NotFoundError("User not found");
+      throw new NotFoundError("Reseller not found");
     }
 
     if ('role' in userData || 'cnpj' in userData || 'legalName' in userData || 'brandName' in userData) {
@@ -34,7 +34,7 @@ export class UpdateUserService {
     const [, updatedUsers] = await this.userRepository.update(uuid, userData);
     
     if (!updatedUsers || updatedUsers.length === 0) {
-      throw new InternalServerError("Failed to update user");
+      throw new InternalServerError("Failed to update reseller");
     }
 
     return updatedUsers[0];

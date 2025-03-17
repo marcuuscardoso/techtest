@@ -10,7 +10,7 @@ interface ILoginRequest {
 }
 
 interface ILoginResponse {
-  user: Omit<User, 'password'>;
+  reseller: Omit<User, 'password'>;
   accessToken: string;
   refreshToken: string;
 }
@@ -40,7 +40,7 @@ export class LoginService {
     const { password: _, ...userWithoutPassword } = user.toJSON();
 
     return {
-      user: userWithoutPassword as User,
+      reseller: userWithoutPassword as User,
       accessToken,
       refreshToken
     };

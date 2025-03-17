@@ -12,13 +12,13 @@ export class GetOrderByIdService {
 
   async execute(uuid: string): Promise<Order> {
     if (!uuid) {
-      throw new ValidationError("ID do pedido é obrigatório");
+      throw new ValidationError("Order ID is required");
     }
 
     const order = await this.orderRepository.findById(uuid);
 
     if (!order) {
-      throw new NotFoundError("Pedido não encontrado");
+      throw new NotFoundError("Order not found");
     }
 
     return order;

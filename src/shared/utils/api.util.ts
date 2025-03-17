@@ -21,13 +21,13 @@ export class ApiUtil {
   }
 
   /**
-   * Configura uma nova instância de API
-   * @param name Nome único para identificar esta API
-   * @param config Configuração da API
+   * Sets up a new API instance
+   * @param name Unique name to identify this API
+   * @param config API configuration
    */
   public setupApi(name: string, config: ApiConfig): void {
     if (this.apiInstances.has(name)) {
-      this.logger.warn(`API com nome "${name}" já existe e será sobrescrita`);
+      this.logger.warn(`API with name "${name}" already exists and will be overwritten`);
     }
 
     const instance = axios.create({
@@ -41,22 +41,22 @@ export class ApiUtil {
 
     instance.interceptors.request.use(
       (config) => {
-        this.logger.info(`Requisição para ${name}: ${config.method?.toUpperCase()} ${config.url}`);
+        this.logger.info(`Request to ${name}: ${config.method?.toUpperCase()} ${config.url}`);
         return config;
       },
       (error) => {
-        this.logger.error(`Erro na requisição para ${name}:`, error);
-        return Promise.reject(new InternalServerError(`Erro na requisição para ${name}: ${error.message}`));
+        this.logger.error(`Error in request to ${name}:`, error);
+        return Promise.reject(new InternalServerError(`Error in request to ${name}: ${error.message}`));
       }
     );
 
     instance.interceptors.response.use(
       (response) => {
-        this.logger.info(`Resposta de ${name}: ${response.status} ${response.statusText}`);
+        this.logger.info(`Response from ${name}: ${response.status} ${response.statusText}`);
         return response;
       },
       (error) => {
-        this.logger.error(`Erro na resposta de ${name}:`, error.response || error);
+        this.logger.error(`Error in response from ${name}:`, error.response || error);
         return Promise.reject(error);
       }
     );
@@ -65,65 +65,65 @@ export class ApiUtil {
   }
 
   /**
-   * Obtém uma instância de API configurada
-   * @param name Nome da API
+   * Gets a configured API instance
+   * @param name API name
    */
   public getApi(name: string): AxiosInstance {
     const api = this.apiInstances.get(name);
     if (!api) {
-      throw new InternalServerError(`API com nome "${name}" não encontrada. Configure-a primeiro com setupApi()`);
+      throw new InternalServerError(`API with name "${name}" not found. Configure it first with setupApi()`);
     }
     return api;
   }
 
   /**
-   * Faz uma requisição GET
-   * @param apiName Nome da API
-   * @param url URL da requisição (relativa à baseURL)
-   * @param config Configurações adicionais
+   * Makes a GET request
+   * @param apiName API name
+   * @param url Request URL (relative to baseURL)
+   * @param config Additional configurations
    */
   public async get<T = any>(apiName: string, url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.getApi(apiName).get<T>(url, config);
   }
 
   /**
-   * Faz uma requisição POST
-   * @param apiName Nome da API
-   * @param url URL da requisição (relativa à baseURL)
-   * @param data Dados a serem enviados
-   * @param config Configurações adicionais
+   * Makes a POST request
+   * @param apiName API name
+   * @param url Request URL (relative to baseURL)
+   * @param data Data to be sent
+   * @param config Additional configurations
    */
   public async post<T = any>(apiName: string, url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.getApi(apiName).post<T>(url, data, config);
   }
 
   /**
-   * Faz uma requisição PUT
-   * @param apiName Nome da API
-   * @param url URL da requisição (relativa à baseURL)
-   * @param data Dados a serem enviados
-   * @param config Configurações adicionais
+   * Makes a PUT request
+   * @param apiName API name
+   * @param url Request URL (relative to baseURL)
+   * @param data Data to be sent
+   * @param config Additional configurations
    */
   public async put<T = any>(apiName: string, url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.getApi(apiName).put<T>(url, data, config);
   }
 
   /**
-   * Faz uma requisição PATCH
-   * @param apiName Nome da API
-   * @param url URL da requisição (relativa à baseURL)
-   * @param data Dados a serem enviados
-   * @param config Configurações adicionais
+   * Makes a PATCH request
+   * @param apiName API name
+   * @param url Request URL (relative to baseURL)
+   * @param data Data to be sent
+   * @param config Additional configurations
    */
   public async patch<T = any>(apiName: string, url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.getApi(apiName).patch<T>(url, data, config);
   }
 
   /**
-   * Faz uma requisição DELETE
-   * @param apiName Nome da API
-   * @param url URL da requisição (relativa à baseURL)
-   * @param config Configurações adicionais
+   * Makes a DELETE request
+   * @param apiName API name
+   * @param url Request URL (relative to baseURL)
+   * @param config Additional configurations
    */
   public async delete<T = any>(apiName: string, url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.getApi(apiName).delete<T>(url, config);

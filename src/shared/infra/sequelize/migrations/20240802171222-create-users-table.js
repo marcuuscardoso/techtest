@@ -9,7 +9,7 @@ module.exports = {
         allowNull: false,
         unique: {
           name: "unique_user_uuid",
-          msg: "Colisão no UUID do usuário."
+          msg: "Collision in user UUID."
         },
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
@@ -62,7 +62,7 @@ module.exports = {
         allowNull: false,
       },
       role: {
-        type: Sequelize.ENUM("ADMIN", "USER"),
+        type: Sequelize.ENUM("ADMIN", "RESELLER"),
         allowNull: false,
       },
       password: {

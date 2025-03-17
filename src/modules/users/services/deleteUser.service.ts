@@ -13,13 +13,13 @@ export class DeleteUserService {
     const existingUser = await this.userRepository.findById(uuid);
 
     if (!existingUser) {
-      throw new NotFoundError("User not found");
+      throw new NotFoundError("Reseller not found");
     }
 
     const deletedCount = await this.userRepository.delete(uuid);
     
     if (deletedCount === 0) {
-      throw new InternalServerError("Failed to delete user");
+      throw new InternalServerError("Failed to delete reseller");
     }
   }
 } 

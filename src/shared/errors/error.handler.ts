@@ -36,7 +36,7 @@ export const errorHandler: ErrorRequestHandler = (error: any, req: Request, res:
     const response = {
         message: matchedError && typeof matchedError.message === "function"
             ? matchedError?.message()
-            : error.message || "Ocorreu um erro interno. Por favor, tente novamente mais tarde.", 
+            : error.message || "An internal error occurred. Please try again later.", 
         timestamp: new Date().toISOString(),
         ...(process.env.DEBUG && { stack: error.stack })
     };

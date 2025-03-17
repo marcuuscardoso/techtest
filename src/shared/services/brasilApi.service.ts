@@ -4,10 +4,16 @@ import { NotFoundError } from '@/shared/errors/not-found.error';
 import { TooManyRequestsError } from '@/shared/errors/too-many-requests.error';
 import { InternalServerError } from '@/shared/errors/internal-server.error';
 
-export interface CNPJResponse {
+interface BrasilApiCNPJResponse {
   cnpj: string;
   razao_social: string;
   nome_fantasia: string;
+}
+
+export interface CNPJResponse {
+  cnpj: string;
+  legalName: string;
+  tradingName: string;
 }
 
 export class BrasilApiService {
@@ -38,23 +44,31 @@ export class BrasilApiService {
     const cleanCNPJ = cnpj.replace(/\D/g, '');
     
     if (cleanCNPJ.length !== 14) {
-      throw new ValidationError('CNPJ deve conter 14 dígitos numéricos');
+      throw new ValidationError('CNPJ must contain 14 numeric digits');
     }
 
     try {
-      const response = await this.apiUtil.get<CNPJResponse>(
+      const response = await this.apiUtil.get<BrasilApiCNPJResponse>(
         this.API_NAME,
         `/cnpj/v1/${cleanCNPJ}`
       );
-      return response.data;
+      
+      // Map the Portuguese field names to English
+      const mappedResponse: CNPJResponse = {
+        cnpj: response.data.cnpj,
+        legalName: response.data.razao_social,
+        tradingName: response.data.nome_fantasia
+      };
+      
+      return mappedResponse;
     } catch (error: any) {
       if (error.response?.status === 404) {
-        throw new NotFoundError('CNPJ não encontrado ou inválido');
+        throw new NotFoundError('CNPJ not found or invalid');
       }
       if (error.response?.status === 429) {
-        throw new TooManyRequestsError('Limite de requisições excedido. Tente novamente mais tarde');
+        throw new TooManyRequestsError('Request limit exceeded. Please try again later');
       }
-      throw new InternalServerError(`Erro ao consultar CNPJ: ${error.message || 'Erro desconhecido'}`);
+      throw new InternalServerError(`Error querying CNPJ: ${error.message || 'Unknown error'}`);
     }
   }
 } 

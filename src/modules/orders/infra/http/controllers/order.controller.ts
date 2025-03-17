@@ -14,14 +14,14 @@ export class OrderController {
 
   async createOrder(req: Request, res: Response): Promise<Response> {
     const createOrderSchema = z.object({
-      cnpj: z.string().min(14, "CNPJ é obrigatório"),
+      cnpj: z.string().min(14, "CNPJ is required"),
       items: z.array(
        z.object({
-          productId: z.string().uuid("ID do produto inválido"),
-          productName: z.string().min(1, "Nome do produto é obrigatório"),
-          quantity: z.number().int().positive("Quantidade deve ser maior que zero"),
+          productId: z.string().uuid("Invalid product ID"),
+          productName: z.string().min(1, "Product name is required"),
+          quantity: z.number().int().positive("Quantity must be greater than zero"),
         })
-      ).min(1, "Pelo menos um item é obrigatório"),
+      ).min(1, "At least one item is required"),
       observations: z.string().optional()
     });
 

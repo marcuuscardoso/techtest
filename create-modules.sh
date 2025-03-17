@@ -9,7 +9,7 @@ create_module() {
   local module_path="./src/modules/$folder_name"
 
   if [ -d "$module_path" ]; then
-    echo "O módulo '$folder_name' já existe."
+    echo "The module '$folder_name' already exists."
     exit 1
   fi
 
@@ -25,14 +25,14 @@ create_module() {
 
   populate_module $files_name $module_path
 
-  echo "Módulo '$folder_name' criado com sucesso."
+  echo "Module '$folder_name' created successfully."
 }
 
 populate_module() {
   local files_name=$1
   local module_path=$2
 
-  # Conteúdo da Rota
+  # Route Content
   local route_content="import { Router } from 'express';
 import { ${files_name^}Controller } from '../controllers/${files_name}.controller';
 import { errorMiddleware } from '@shared/errors/error.handler';
@@ -45,7 +45,7 @@ router.get('/', errorMiddleware(async (req, res) => ${files_name}Controller.GetA
 
 export default router;"
 
-  # Conteúdo do Controller
+  # Controller Content
   local controller_content="import { Request, Response } from 'express';
   
   export class ${files_name^}Controller {
@@ -57,7 +57,7 @@ export default router;"
   }
 }"
 
-  # Conteúdo do Repositório
+  # Repository Content
   local repository_content="export class ${files_name^}Repository {
   constructor() {
   }
