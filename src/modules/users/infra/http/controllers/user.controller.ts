@@ -45,27 +45,32 @@ export class UserController {
 
   async createUser(req: Request, res: Response) {
     const bodySchema = z.object({
-      name: z.string().min(1).max(100),
       email: z.string().email().max(100),
-      phone: z.string().min(1).max(100),
+      password: z.string().min(6).max(100),
       cnpj: z.string().min(1).max(256),
-      state: z.string().min(1).max(256),
-      city: z.string().min(1).max(256),
-      neighborhood: z.string().min(1).max(256),
-      street: z.string().min(1).max(256),
-      number: z.string().min(1).max(256),
-      password: z.string().min(6).max(100)
+      names: z.array(z.object({
+        name: z.string().min(1).max(100),
+        isPrimary: z.boolean().optional()
+      })).min(1),
+      phones: z.array(z.string().min(10).max(20)).optional(),
+      addresses: z.array(z.object({
+        state: z.string().min(1).max(100),
+        city: z.string().min(1).max(100),
+        neighborhood: z.string().min(1).max(100),
+        street: z.string().min(1).max(255),
+        number: z.string().min(1).max(20),
+        complement: z.string().max(255).optional(),
+        zipCode: z.string().min(1).max(20),
+      })).min(1)
     }).strict();
 
     const userData = bodySchema.parse(req.body);
 
     const user = await this.createUserService.execute(userData);
 
-    const { password, ...userWithoutPassword } = user.toJSON();
-
     return res
       .status(201)
-      .json(userWithoutPassword);
+      .json(user);
   }
 
   async updateUser(req: Request, res: Response) {
@@ -76,25 +81,16 @@ export class UserController {
     const { id } = paramsSchema.parse(req.params);
 
     const bodySchema = z.object({
-      name: z.string().min(1).max(100).optional(),
       email: z.string().email().max(100).optional(),
-      phone: z.string().min(1).max(100).optional(),
-      state: z.string().min(1).max(256).optional(),
-      city: z.string().min(1).max(256).optional(),
-      neighborhood: z.string().min(1).max(256).optional(),
-      street: z.string().min(1).max(256).optional(),
-      number: z.string().min(1).max(256).optional(),
     }).strict();
 
     const userData = bodySchema.parse(req.body);
 
     const updatedUser = await this.updateUserService.execute(id, userData);
 
-    const { password, ...userWithoutPassword } = updatedUser.toJSON();
-
     return res
       .status(200)
-      .json(userWithoutPassword);
+      .json(updatedUser);
   }
 
   async deleteUser(req: Request, res: Response) {

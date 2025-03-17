@@ -1,5 +1,8 @@
 import { UUIDV4 } from "sequelize";
-import { AllowNull, Column, DataType, Default, IsEmail, Model, NotNull, PrimaryKey, Table, Unique } from "sequelize-typescript";
+import { AllowNull, Column, DataType, Default, HasMany, Model, PrimaryKey, Table, Unique } from "sequelize-typescript";
+import Address from "./address.model";
+import Phone from "./phone.model";
+import UserName from "./userName.model";
 
 export enum EUserRole {
     ADMIN = "ADMIN",
@@ -8,17 +11,10 @@ export enum EUserRole {
 
 export interface IUser {
     uuid?: string;
-    name: string;
     email: string;
-    phone: string;
     cnpj: string;
     legalName: string;
     brandName: string;
-    state: string;
-    city: string;
-    neighborhood: string;
-    street: string;
-    number: string;
     role: EUserRole;
     password: string;
 }
@@ -39,16 +35,12 @@ export default class User extends Model<IUser> {
     declare public uuid: string;
 
     @AllowNull(false)
-    @Column(DataType.STRING(100))
-    declare public name: string;
-
-    @AllowNull(false)
+    @Unique({
+        name: "unique_user_email",
+        msg: "Este email já está em uso."
+    })
     @Column(DataType.STRING(100))
     declare public email: string;
-
-    @AllowNull(false)
-    @Column(DataType.STRING(100))
-    declare public phone: string;
 
     @AllowNull(false)
     @Column(DataType.STRING(256))
@@ -61,26 +53,6 @@ export default class User extends Model<IUser> {
     @AllowNull(false)
     @Column(DataType.STRING(256))
     declare public brandName: string;
-    
-    @AllowNull(false)
-    @Column(DataType.STRING(256))
-    declare public state: string;
-    
-    @AllowNull(false)
-    @Column(DataType.STRING(256))
-    declare public city: string;
-    
-    @AllowNull(false)
-    @Column(DataType.STRING(256))
-    declare public neighborhood: string;
-    
-    @AllowNull(false)
-    @Column(DataType.STRING(256))
-    declare public street: string;
-    
-    @AllowNull(false)
-    @Column(DataType.NUMBER())
-    declare public number: string;
 
     @AllowNull(false)
     @Column(DataType.STRING(256))
@@ -89,4 +61,13 @@ export default class User extends Model<IUser> {
     @AllowNull(false)
     @Column(DataType.STRING(256))
     declare public password: string;
+
+    @HasMany(() => Phone)
+    declare public phones: Phone[];
+
+    @HasMany(() => Address)
+    declare public addresses: Address[];
+
+    @HasMany(() => UserName)
+    declare public names: UserName[];
 }

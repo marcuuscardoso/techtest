@@ -53,7 +53,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"11999999999\",\n    \"cnpj\": \"48261039000199\",\n    \"state\": \"São Paulo\",\n    \"city\": \"São Paulo\",\n    \"neighborhood\": \"Centro\",\n    \"street\": \"Avenida Paulista\",\n    \"number\": \"1000\",\n    \"password\": \"password123\"\n}"
+              "raw": "{\n    \"email\": \"john.doe@example.com\",\n    \"password\": \"password123\",\n    \"cnpj\": \"48261039000199\",\n    \"names\": [\n        {\n            \"name\": \"John Doe\",\n            \"isPrimary\": true\n        },\n        {\n            \"name\": \"Johnny\"\n        }\n    ],\n    \"phones\": [\n        {\n            \"number\": \"11999999999\",\n            \"isPrimary\": true\n        },\n        {\n            \"number\": \"11988888888\"\n        }\n    ],\n    \"addresses\": [\n        {\n            \"state\": \"São Paulo\",\n            \"city\": \"São Paulo\",\n            \"neighborhood\": \"Centro\",\n            \"street\": \"Avenida Paulista\",\n            \"number\": \"1000\",\n            \"complement\": \"Apto 123\",\n            \"zipCode\": \"01310-100\",\n            \"isPrimary\": true\n        },\n        {\n            \"state\": \"Rio de Janeiro\",\n            \"city\": \"Rio de Janeiro\",\n            \"neighborhood\": \"Copacabana\",\n            \"street\": \"Avenida Atlântica\",\n            \"number\": \"500\",\n            \"zipCode\": \"22010-000\"\n        }\n    ]\n}"
             },
             "url": {
               "raw": "{{baseurl}}/users",
@@ -75,7 +75,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"John Doe Updated\",\n    \"email\": \"john.updated@example.com\",\n    \"phone\": \"11988888888\",\n    \"state\": \"Rio de Janeiro\",\n    \"city\": \"Rio de Janeiro\",\n    \"neighborhood\": \"Copacabana\",\n    \"street\": \"Avenida Atlântica\",\n    \"number\": \"2000\"\n}"
+              "raw": "{\n    \"email\": \"john.updated@example.com\"\n}"
             },
             "url": {
               "raw": "{{baseurl}}/users/:id",

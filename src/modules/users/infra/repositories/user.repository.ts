@@ -1,19 +1,38 @@
 import User, { IUser } from "@/shared/infra/sequelize/models/user.model";
+import Address from "@/shared/infra/sequelize/models/address.model";
+import Phone from "@/shared/infra/sequelize/models/phone.model";
+import UserName from "@/shared/infra/sequelize/models/userName.model";
 
 export class UserRepository {
   async findAll(): Promise<User[]> {
-    return User.findAll();
+    return User.findAll({
+      include: [
+        { model: Address },
+        { model: Phone },
+        { model: UserName }
+      ]
+    });
   }
 
   async findById(uuid: string): Promise<User | null> {
     return User.findOne({
-      where: { uuid }
+      where: { uuid },
+      include: [
+        { model: Address },
+        { model: Phone },
+        { model: UserName }
+      ]
     });
   }
 
   async findByEmail(email: string): Promise<User | null> {
     return User.findOne({
-      where: { email }
+      where: { email },
+      include: [
+        { model: Address },
+        { model: Phone },
+        { model: UserName }
+      ]
     });
   }
 
