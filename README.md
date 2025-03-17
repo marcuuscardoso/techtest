@@ -14,6 +14,7 @@ Este projeto é uma API RESTful para gerenciamento de pedidos, usuários e auten
   - [Pedidos](#pedidos)
 - [Mecanismo de Retry para API Externa](#mecanismo-de-retry-para-api-externa)
 - [Testando a API com Postman](#testando-a-api-com-postman)
+- [Considerações sobre o Projeto](#considerações-sobre-o-projeto) - IMPORTANTE
 - [Comandos Úteis](#comandos-úteis)
 
 ## Requisitos
@@ -192,6 +193,32 @@ O projeto inclui uma coleção do Postman para facilitar os testes da API:
    - Use a requisição "Create Order (1000+ units)" para criar um pedido com mais de 1000 unidades
    - Verifique nos logs do servidor o processo de retry e a simulação de sucesso
    - Use a requisição "Get Order By ID" para verificar o status atualizado do pedido
+
+## Considerações sobre o Projeto
+
+Este projeto foi desenvolvido exclusivamente como parte de um teste técnico e serve como demonstração de conceitos e habilidades de desenvolvimento. Em um cenário de produção real, diversas melhorias e adaptações seriam necessárias:
+
+### Arquitetura e Escalabilidade
+
+- **Filas de Mensagens**: Substituição do mecanismo de retry em memória por uma solução robusta de filas como RabbitMQ, Apache Kafka ou AWS SQS para garantir persistência e escalabilidade.
+- **Microserviços**: Potencial separação em microserviços distintos para gerenciamento de usuários, pedidos e integração com APIs externas.
+- **Containers e Orquestração**: Implementação completa com Docker e Kubernetes para orquestração de containers e escalabilidade horizontal.
+
+### Segurança e Robustez
+
+- **Autenticação Avançada**: Implementação de OAuth 2.0 ou OpenID Connect para autenticação mais robusta.
+- **Rate Limiting**: Proteção contra abusos com limitação de requisições.
+- **Monitoramento Avançado**: Integração com ferramentas como Prometheus, Grafana e ELK Stack para monitoramento em tempo real.
+- **Testes Automatizados**: Expansão da cobertura de testes unitários, de integração e end-to-end.
+
+### Integração e Processamento
+
+- **Circuit Breaker**: Implementação de padrões como Circuit Breaker para lidar com falhas de serviços externos.
+- **Idempotência**: Garantia de idempotência em todas as operações críticas.
+- **Transações Distribuídas**: Implementação de padrões como Saga para gerenciar transações distribuídas.
+- **Webhooks**: Adição de webhooks para notificações em tempo real sobre mudanças de status.
+
+Este projeto demonstra conceitos fundamentais de desenvolvimento de APIs, integração de sistemas e tratamento de falhas, mas em um ambiente de produção, seria necessário um investimento significativo em infraestrutura, segurança e arquitetura para garantir a confiabilidade, escalabilidade e manutenibilidade do sistema.
 
 ## Comandos Úteis
 
